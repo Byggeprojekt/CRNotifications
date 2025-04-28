@@ -63,6 +63,30 @@ public class CRNotifications {
         
         return view
     }
+    
+    @discardableResult
+    public static func showNotificationAttributed(type: CRNotificationType, title: String, message: NSAttributedString, dismissDelay: TimeInterval, delegate: CRNotificationDelegate? = nil, completion: @escaping () -> () = {}) -> CRNotification? {
+        let view = CRNotificationView()
+        
+        view.setBackgroundColor(color: type.backgroundColor)
+        view.setTextColor(color: UIColor.init(red: 170/255.0, green: 170/255.0, blue: 170/255.0, alpha: 1))
+        view.setImage(image: type.image)
+        view.setTitle(title: title)
+        view.setAttributedMessage(message: message)
+        view.setDismisTimer(delay: dismissDelay)
+        view.setCompletionBlock(completion)
+        view.onClickDelegate = delegate
+        
+        guard let window = UIApplication.shared.keyWindow else {
+            print("Failed to show CRNotification. No keywindow available.")
+            return nil
+        }
+        
+        window.addSubview(view)
+        view.showNotification()
+        
+        return view
+    }
 }
 
 fileprivate struct CRNotificationTypeDefinition: CRNotificationType {
