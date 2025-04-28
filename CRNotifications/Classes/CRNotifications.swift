@@ -16,7 +16,7 @@ public class CRNotifications {
     
     // MARK: - Static notification types
     
-    public static let success: CRNotificationType = CRNotificationTypeDefinition(textColor: UIColor.white, backgroundColor: UIColor.flatGreen, image: UIImage(named: "success", in: Bundle(for: CRNotifications.self), compatibleWith: nil))
+    public static let success: CRNotificationType = CRNotificationTypeDefinition(textColor: UIColor.white, backgroundColor: UIColor.init(red: 22/255.0, green: 23/255.0, blue: 26/255.0, alpha: 1), image: UIImage(named: "issue_created_notification_icon", in: Bundle(for: CRNotifications.self), compatibleWith: nil))
     public static let error: CRNotificationType = CRNotificationTypeDefinition(textColor: UIColor.white, backgroundColor: UIColor.flatRed, image: UIImage(named: "error", in: Bundle(for: CRNotifications.self), compatibleWith: nil))
     public static let info: CRNotificationType = CRNotificationTypeDefinition(textColor: UIColor.white, backgroundColor: UIColor.flatGray, image: UIImage(named: "info", in: Bundle(for: CRNotifications.self), compatibleWith: nil))
 
@@ -50,7 +50,7 @@ public class CRNotifications {
         view.setTitle(title: title)
         view.setMessage(message: message)
         view.setDismisTimer(delay: dismissDelay)
-		view.setCompletionBlock(completion)
+        view.setCompletionBlock(completion)
         view.onClickDelegate = delegate
         
         guard let window = UIApplication.shared.keyWindow else {

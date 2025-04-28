@@ -36,17 +36,17 @@ public class CRNotificationView: UIView, CRNotification {
         label.textColor = .white
         label.numberOfLines = 2
         return label
-	}()
-	
+    }()
+    
     private var completion: () -> () = {}
     public var onClickDelegate: CRNotificationDelegate?
     
     // MARK: - Init
-	
+    
     required internal init?(coder aDecoder:NSCoder) { fatalError("Not implemented.") }
     
-	internal init() {
-		let deviceWidth = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+    internal init() {
+        let deviceWidth = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         let widthFactor: CGFloat = DeviceManager.value(iPhone35: 0.9, iPhone40: 0.9, iPhone47: 0.9, iPhone55: 0.85, iPhone58: 0.9, iPhone61: 0.9, iPadSmall: 0.5, iPadMedium: 0.45, iPadBig: 0.4)
         let heightFactor: CGFloat = DeviceManager.value(iPhone35: 0.22, iPhone40: 0.22, iPhone47: 0.2, iPhone55: 0.2, iPhone58: 0.18, iPhone61: 0.18, iPadSmall: 0.18, iPadMedium: 0.17, iPadBig: 0.17)
 
@@ -67,8 +67,8 @@ public class CRNotificationView: UIView, CRNotification {
     private func setupLayer() {
         layer.cornerRadius = 5
         layer.shadowRadius = 5
-        layer.shadowOpacity = 0.25
-        layer.shadowColor = UIColor.lightGray.cgColor
+//        layer.shadowOpacity = 0.25
+//        layer.shadowColor = UIColor.lightGray.cgColor
     }
     
     private func setupSubviews() {
@@ -84,14 +84,14 @@ public class CRNotificationView: UIView, CRNotification {
             imageView.bottomAnchor.constraint(equalTo: imageView.superview!.bottomAnchor, constant: -12),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
-		
-		NSLayoutConstraint.activate([
+        
+        NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(lessThanOrEqualTo: titleLabel.superview!.topAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: titleLabel.superview!.trailingAnchor, constant: -8)
         ])
-		
-		NSLayoutConstraint.activate([
+        
+        NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
             messageLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             messageLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
@@ -107,7 +107,7 @@ public class CRNotificationView: UIView, CRNotification {
         
         addGestureRecognizer(tapRecognizer)
         addGestureRecognizer(swipeRecognizer)
-	}
+    }
     
     
     // MARK: - Helpers
@@ -135,9 +135,17 @@ public class CRNotificationView: UIView, CRNotification {
         titleLabel.text = title
     }
     
+    internal func setAttributedTitle(title: NSAttributedString) {
+        titleLabel.attributedText = title
+    }
+    
     /** Sets the message of the notification **/
     internal func setMessage(message: String) {
         messageLabel.text = message
+    }
+    
+    internal func setAttributedMessage(message: NSAttributedString) {
+        messageLabel.attributedText = message
     }
     
     /** Sets the image of the notification **/
